@@ -1,0 +1,93 @@
+Introducción 
+En el siguiente proyecto se va a realizar un programa que consiste básicamente en la representación y el mapeo de la ubicación de algunos de los sismos ocurridos en la república mexicana obtenidos en la pagina de sismos representados por medio de un mapa y utilizando marcadores. 
+Para la realización de este proyecto es necesario  tener instalado el programa enthought canopy de python (2.7 o 3.7)  en la computadora y dentro de  él tener descargadas las librerías correspondientes cada una de ellas tendrá que desempeñar funciones específicas, por ejemplo, el módulo “pandas” se usa para manipular y analizar los datos contenidos en un archivo delimitado por comas, el módulo por último el módulo “folium”  para que nos muestre los datos en un mapa interactivo entre otras cosas.
+
+ 
+
+Abstract 
+In the next project a program will be carried out consisting of the representation and map of the location of some of the earthquakes that occurred in the Mexican Republic and the page of earthquakes represented by the middle of a map and the owners. For this, it is necessary to take into account the python canopy program (2.7 or 3.7) in the computer and in which it is downloaded. "It is used to manipulate and analyze the data contained in a file delimited by commas, the module finally the module" folium "to show us the data on an interactive map among other things.
+
+Keywords: Python, enthought canopy 
+Resumen
+El siguiente proyecto resuelve la problemática de conocer la cantidad de sismos transcurridos en un periodo de 10 días y de esta forma conocer las zonas donde se dieron la mayor cantidad de sismos toda información recopilada sobre los sismos fue adquirirá de la página del servicio sismológico nacional, el objetivo principal es fue realizar un análisis sísmico donde denotáramos las zonas donde hay más actividad sísmica en el país se le fue adherida una función al código (cluster)  en el cual nos daba la cantidad de sismos por zona. El proyecto  “Mapeo de Sismos”  se realizó de la siguiente manera, primero se buscó en internet un archivo que sismos registrados, lugar donde está situado y sus coordenadas y así de esa manera con el módulo “pandas” manipular y utilizar los datos que contenía el archivo delimitado por comas(.csv), después de introducir el archivo .csv se realizó un ciclo
+
+Desarrollo
+Para comenzar con este trabajo se llevó a cabo una búsqueda de información para tener conocimiento de que es lo que se puede lograr a hacer con el programa Python manipulándolo de manera que pueda resolver algunas de las necesidades que se presenten, como lo son la representación gráfica y manipulación de datos.
+1.- Para la realización de este proyecto es necesario tener instalado el programa enthought canopy de python (2.7 o 3.7) en la computadora y dentro de él tener descargadas las librerías correspondientes que ejecutaran funciones específicas dentro del programa.  El primer paso es   obtener un archivo (.csv) el cal contenga la información requerida para realizar el proyecto y para poderlas manipular dentro del programa se utiliza la primera librería llamada “pandas” la cual nos permite utilizar, manipular y analizar los datos contenidos en un archivo delimitado por comas (.csv).
+
+2.-El segundo módulo que vamos a importar se llama “folium” y se encarga de crear los mapas. En la variable “mexico” contiene la información retornada de la función de folium.Map, los argumentos de esta función ocupan la localización del mapa que vamos a crear y el zoom es que este va a tener ya  que resulta bastante fácil de usar puesto que genera mapas interactivos que se pueden personalizar de la manera que más nos favorezca. Nuevamente se requiere la realización de un bucle para que este dentro de un mismo proceso plasme y marque la ubicación de cada sismo con sus repeesctivas caracteristicas dentro de un “popup”. 
+3.-La función folium.MarkerCluster es el que crea esta modalidad de juntar geométricamente los marcadores. Es función ocupa una etiqueta y que sea adherida a nuestro mapa ya que la variable mapCluster, es la encargada de crear el cluster
+4.- Lo siguiente es un ciclo “for” que va a leer la matriz sismos que contiene la información de los sismos, “r” va hacer la variable utilizada adentro de nuestro for, por ende, esta va a contener los parámetros para nuestras variables.
+Magnitud contiene la magnitud del sismo en cuestión.
+Fecha contiene la fecha del sismo en cuestión.
+Las siguientes líneas de código son condiciones que nos ayudaran a poner el color de cada marcador del mapa.
+La variable llamada “col” es de tipo cadena y solo tendrá el nombre del color.
+5.- La variable info también es de tipo cadena y tendrá concatenada la magnitud y la fecha.
+Folium.Marker es una función de folium que nos ayuda a poner marcadores, pondremos la latitud y longitud de cada sismo. En el popup se mostrará la cadena info y el icono tendrá el color correspondiente a la magnitud antes condicionada. Al final de la función se va adherir al mapa
+6.- “Mexico.save” es la función que crea el HTML, en este caso llamada “map.html”.
+
+.
+Paso por paso cada línea de código.
+Linea1
+-primero se van a cargar los módulos que se van a utilizar para la realización del programa.
+-se va a utilizar pandas para utilizar, manipular y analizar los datos en un archivo delimitado por comas (.csv)
+-se utilizará folium para que nos muestre los datos en un mapa interactivo.
+import pandas 
+import folium
+-El tiempo que duro en cargar y ejecutar fue inmediato.
+Linea2
+El segundo módulo que vamos a importar se llama “folium” y se encarga de crear los mapas. En la variable “mexico” contiene la información retornada de la función de folium.Map, los argumentos de esta función ocupan la localización del mapa que vamos a crear y el zoom es que este va a tener.
+.
+mexico = folium.Map(location=[23.000, -102.000], zoom_start = 4)
+Linea3
+- La función folium.MarkerCluster es el que crea esta modalidad de juntar geométricamente los marcadores. Es función ocupa una etiqueta y que sea adherida a nuestro mapa.
+mapCluster = folium.MarkerCluster("Sismos").add_to(mexico)
+
+
+
+
+Linea4
+Lo siguiente es un ciclo “for” que va a leer la matriz sismos que contiene la información de los sismos, “r” va hacer la variable utilizada adentro de nuestro for, por ende, esta va a contener los parámetros para nuestras variables.
+Magnitud contiene la magnitud del sismo en cuestión.
+Fecha contiene la fecha del sismo en cuestión.
+Las siguientes líneas de código son condiciones que nos ayudaran a poner el color de cada marcador del mapa.
+La variable llamada “col” es de tipo cadena y solo tendrá el nombre del color.
+La variable info  es de tipo cadena y tendrá concatenada la magnitud y la fecha.
+Folium.Marker es una función de folium que nos ayuda a poner marcadores, pondremos la latitud y longitud de cada sismo. En el popup se mostrará la cadena info y el icono tendrá el color correspondiente a la magnitud antes condicionada. Al final de la función se va adherir al mapa.
+for r in sismos[0:213].iterrows():
+m = r[1]['Magnitud']
+f = r[1]['Fecha']
+if (m >= 4.5):col = 'red'
+if (m > 3.5 and m < 4.5):col = 'orange'
+if (m < 3.5):col = 'green'
+info = "Mag:" + str(m) + " Fecha:" + f
+folium.Marker((r[1]['Latitud'],r[1]['Longitud']), popup = info,icon =folium.Icon( col,icon='info-sign')).add_to(mapCluster)
+
+
+
+
+
+
+Linea5
+Esta nos ayudo para guardar el mapa es esta función “Mexico.save” ya que ayuda a  crear el HTML, en este caso la llamaremos  “map.html”.
+mexico.save('map.html')
+.
+
+Especificaciones del equipo.
+
+ 
+Se intento realizar el mismo proceso en otro equipo, pero surgieron problemas con las versiones instaladas de los módulos.
+
+Manejo de datos:
+Para la realización de este proyecto fue necesario buscar una pagina de sismos la cual registre los ocurridos en nuestra área de estudio(link de la pagina al final) nos da un archivo csv el cual contiene lo requerido para la elaboración de este programa
+
+
+
+
+
+Resultados Obtenidos:
+Teniendo a la mano el mapa  se realizó el análisis sísmico en el cual nos damos cuenta que en un total de 10 días se registraron un total de 207 sismos,  la zona donde se registró la mayor cantidad fue en la zona de Oaxaca, Chiapas  y que colinda con la frontera de Guatemala, en esta zona se registraron un total de 176 sismos. La segunda zona con más sismos se encuentra entre los municipios de Colima y Michoacán con un total de 19 sismos y por último la zona donde se registró la menor cantidad de eventos sísmicos fue en las dos Baja California. 
+
+
+Conclusión:
+Como un aprendizaje adquirido de este proyecto fue que pude realizar un código con el cual se generaron un  mapa y con el cual se pude realizar mi análisis final, cabe mencionar que para la elaboración de este proyecto se tuvieron una serie de problemas al momento de leer el archivo csv en la plataforma usada(jupyter) así que se optó por   utilizar un método alternativo pero esto sin afectar el objetivo principal y cuidando ante todo la sintaxis que lleva el lenguaje python, también queda como enseñanza que no nos debemos de quedar anclados a un sistema de programar porque como lo que me paso a mí en este caso de que no podía correr el archivo pues tuve que implementar otro método, por último es muy importante aprender a programar porque de esta manera nos podemos ahorrar tiempo en realizar algunos procesos. 
